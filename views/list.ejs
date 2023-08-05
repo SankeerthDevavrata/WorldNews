@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>News</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Montserrat:wght@400;700&family=Sacramento&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+
+  <nav>
+    <div class="main-nav container flex">
+      <a href="#" class="logo">
+        <img src="Images/worldNews.png" alt="Logo">
+      </a>
+      <div class="nav-links" id="navButtonsWrapper">
+        <ul class="flex">
+          <form action="/" method="post">
+            <li class="hover-link nav-item"> <!-- No need for an ID or onclick -->
+              <input type="hidden" name="newsInput" value="Politics">
+              <button class="nav-button" type="submit">Politics</button>
+            </li>
+          </form>
+          <form action="/" method="post">
+            <li class="hover-link nav-item">
+              <input type="hidden" name="newsInput" value="Sports">
+              <button class="nav-button" type="submit">Sports</button>
+            </li>
+          </form>
+          <form action="/" method="post">
+            <li class="hover-link nav-item">
+              <input type="hidden" name="newsInput" value="Science">
+              <button class="nav-button" type="submit">Science</button>
+            </li>
+          </form>
+        </ul>
+      </div>
+      <div class="search-bar flex">
+        <form class="/" method="post">
+          <input type="text" class="news-input" name="newsInput" placeholder="e.g. Cinema" autocomplete="off">
+          <button class="search-button " id="search-button">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="row" style="padding-left: 115px;">
+      <% apiData.forEach(function(newsData){ %>
+      <% if(newsData.urlToImage!=null){  %>
+      <div class="cards-container container flex col-lg-4  " id="dynamicTemplatesContainer">
+
+        <div class="card col-lg-4 nested-div dynamic-template" id="card" data-url=" <%= newsData.url %>">
+          <div class="card-header">
+            <img src="<%= newsData.urlToImage %>" alt="news-image" id="news-img">
+          </div>
+          <div class="card-content">
+            <h3 id="news-title"><%= newsData.title %> </h3>
+            <h6 class="news-source" id="news-source"><%= newsData.source.name %></h6>
+            <p class="news-description" id="news-description"> <%= newsData.description %></p>
+          </div>
+        </div>
+      </div>
+      <%}%>
+    <% }) %>
+    </div>
+  </main>
+
+  <script src="/script.js"></script>
+
+</body>
+
+</html>
